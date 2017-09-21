@@ -1,0 +1,82 @@
+﻿@model DoctorFinal.Models.Post 
+@{
+    ViewBag.Title = " پنل مدیریت-ایجاد پست ";
+    Layout = "~/Views/Shared/_Adminlayout.cshtml";
+}
+@section ViewScript
+{
+    <script>
+        $(Load);
+        function Load()
+        {
+            form1.reset();
+            var list = document.getElementById("blah");
+            list.removeChild(list.firstChild);
+        }
+        $(function () {
+            $("#PostDate").persianDatepicker();
+        });
+        function SelectImage()
+        {
+            document.getElementById("upload").click();
+        }
+        function readURL(input)
+        {
+            if (input.files && input.files[0])
+            {
+                var reader = new FileReader();
+                reader.onload = function (event)
+                {
+                    blah.src = reader.result;
+                    blah.name = FileUpload.value;
+                };
+                reader.readAsDataURL(input.files[0]);
+
+            }
+        }
+    </script>
+}
+<div class="MainDiv">
+    <div class="PostDiv">
+        <form class="form-horizontal" id="form1" method="post" action="../Post/RegisterPost" enctype="multipart/form-data">
+            <input type="hidden" class="form-control" id="PostID" name="PostID"  value="@Model.PostID">
+            <div class="form-group" style="display:none;">
+                <label class="control-label col-sm-3" for="upload"> عکس:</label>
+                <input type="file" class="form-group" id="upload" name="upload" onchange="readURL(this)" multiple />
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="PostDate">تاریخ ثبت:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="PostDate" name="PostDate"  value="@Model.PostDate">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="PostTitle">تیتر:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="txtInput form-control" id="PostTitle" name="PostTitle"  value="@Model.PostTitle">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="PostDetile">جزئیات:</label>
+                <div class="col-sm-10">
+                    @*<input type="text" class="form-control" id="PostDetile" name="PostDetile">*@
+                    <textarea class="txtInput txtarea form-control" id="PostDetile" name="PostDetile" @*rows="15"*@></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="PostBody">اطلاعات:</label>
+                <div class="col-sm-10">
+                    @*<input type="text" class="form-control" id="PostDetile" name="PostDetile">*@
+                    <textarea class="txtInput txtarea form-control" id="PostBody" name="PostBody" @*rows="15"*@></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-info btn-lg" onclick="SelectImage()">انتخاب عکس</button>
+                <input type="submit" value="ذخیره" class="btn btn-info btn-lg" />
+            </div>
+            <div class="BodyDivUpload">
+                <img id="blah"/>
+            </div>
+        </form>
+    </div>
+</div>

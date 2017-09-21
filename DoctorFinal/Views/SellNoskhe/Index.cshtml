@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = " پنل مدیریت-لیست سفارش ها ";
+    Layout = "~/Views/Shared/_Adminlayout.cshtml";
+}
+@section ViewScript
+{
+    <script>
+        $(Load);
+        function Load()
+        {
+            ShowNoskhe();
+        }
+        function ShowNoskhe()
+        {
+            var _httpreq = new XMLHttpRequest();
+            _httpreq.onloadstart = function () {
+                DivLoading.style.display = "block";
+            }
+            _httpreq.onloadend = function () {
+                DivLoading.style.display = "none";
+            }
+            _httpreq.onreadystatechange = function () {
+                if (_httpreq.readyState == 4 && _httpreq.status == 200) {
+                    var _listData = JSON.parse(_httpreq.responseText);
+                    var str = "";
+                    for (var i in _listData) {
+                        str += "<tr data-Com=" + JSON.stringify(_listData[i]) + ">";
+                        str += "<td>" + _listData[i].NoskheCode + "</td>";
+                        str += "<td>" + _listData[i].NoskheDate + "</td>";
+                        str += "<td>" + _listData[i].DoctorFullName + "</td>";
+                        str += "<td>" + _listData[i].CustomerFullName + "</td>";
+                        str += "<td>" + _listData[i].CustomerMobile + "</td>";
+                        str += "<td>" + _listData[i].CustomerAddress + "</td>";
+                        str += "<td><a class='btn btn-primary' href='../SellNoskhe/ShowNoskhe/" + _listData[i].NoskheID + "' >مشاهده</a></td>";
+                        str += "</tr>";
+                        //onclick = 'ShowListNoskhe(" + _listData[i].NoskheID + ")'
+                    }
+                    BodySell.innerHTML = str;
+                }
+            }
+            _httpreq.open("Post", "GetNoskhe", true);
+            _httpreq.setRequestHeader("Content-Type", "Content-Type: application/x-www-form-urlencoded");
+            _httpreq.send();
+        }
+    </script>
+}
+<div class="MainDiv">
+    <div class="SellDivBody">
+        <table class="table table-striped">
+            <thead class="TBLSell">
+                <tr>
+                    <td>کد نسخه</td>
+                    <td>تاریخ نسخه</td>
+                    <td>نام دکتر</td>
+                    <td>نام مشتری</td>
+                    <td>تلفن مشتری</td>
+                    <td>آدرس مشتری</td>
+                    <td>مشاهده نسخه</td>
+                </tr>
+            </thead>
+            <tbody id="BodySell"></tbody>
+        </table>
+        <div id="DivLoading" style="display:none">
+            <img src="~/Images/2.gif" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = " پنل مديريت-میزان فروش ";
+    Layout = "~/Views/Shared/_doctorlayout.cshtml";
+}
+@section ViewScript
+{
+    <script>
+         
+        $(Load);
+        function Load()
+        {
+            var ListData = JSON.parse('@Html.Raw(ViewBag.DataNoskhe)');
+            
+            var TNC=0;
+            //for (var i in ListData)
+            //{
+            //    //TNC += ListData[i].NoskhePrice;
+            //    alert(ListData[i].NoskhePrice);
+            //}
+            for (var i = 0; i < ListData.length; i++)
+            {
+                TNC += ListData[i].NoskhePrice;
+            }
+            document.getElementById("TotalSell").value = TNC;
+            var TIC = (TNC * 5) / 100;
+            document.getElementById("PriceInCome").value = TIC;
+        }
+    </script>
+}
+<div class="MainDiv">
+    <div class="MainIncomeDiv">
+        <input type="hidden" class="form-control" id="DoctorID" name="DoctorID">
+        <div class="col-xs-4" style="border:1px solid black;margin-right:20px;">
+            <div class="DivFour">
+                <h1>درآمد کل</h1>
+                <br />
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-5" for="TotalSell" >فروش کل:</label>
+                        <div class="col-sm-5">
+                            <input type="text" readonly class="form-control" id="TotalSell" name="TotalSell" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5" for="PriceInCome">نرخ سود دریافتی:</label>
+                        <div class="col-sm-5">
+                            <input type="text" readonly class="form-control" id="PriceInCome" name="PriceInCome" value="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-xs-7" style="border:1px solid black;margin-right:20px;">
+
+        </div>
+    </div>
+</div>

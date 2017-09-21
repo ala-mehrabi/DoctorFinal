@@ -1,0 +1,75 @@
+﻿@model DoctorFinal.Models.CustomerInfo 
+@{
+    ViewBag.Title = " پنل مديريت-ليست بيمار ";
+    Layout = "~/Views/Shared/_doctorlayout.cshtml";
+}
+@section ViewScript
+{
+    <script>
+        function SelectImage()
+        {
+            //document.getElementById("CustomerInfoData").click();
+            document.getElementById("upload").click();
+        }
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    blah.src = reader.result;
+                    blah.name = FileUpload.value;
+                };
+                reader.readAsDataURL(input.files[0]);
+                
+            }
+        }
+        $(function () {
+            $("#CustomerInfoRegDate").persianDatepicker();
+        });
+    </script>
+}
+<div class="MainDiv">
+    <div class="BackGrounDiv">
+        <form class="form-horizontal" method="post" action="../Customer/UploadData" enctype="multipart/form-data">
+            <div class="TopDivUpload">
+                <div class="form-group" style="display:none;">
+                    <label class="control-label col-sm-3" for="upload"> عکس:</label>
+                    <input type="file" class="form-group" id="upload" name="upload" onchange="readURL(this)" multiple />
+                </div>
+                <input type="hidden" class="form-control" id="CustomerInfoID" name="CustomerInfoID" value="@Model.CustomerInfoID">
+                <input type="hidden" class="form-control" id="CustomerID" name="CustomerID" value="@Model.CustomerID">
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="CustomerInfoRegDate">تاریخ ثبت:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="CustomerInfoRegDate" name="CustomerInfoRegDate" value="@Model.CustomerInfoRegDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="CustomerInfoVazn">وزن :</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="CustomerInfoVazn" name="CustomerInfoVazn"  value="@Model.CustomerInfoVazn">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="CustomerInfoGhad">قد:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="CustomerInfoGhad" name="CustomerInfoGhad"  value="@Model.CustomerInfoGhad">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="CustomerInfoPicName">نام عکس:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="CustomerInfoPicName" name="CustomerInfoPicName"  value="@Model.CustomerInfoPicName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-info btn-lg" onclick="SelectImage()">انتخاب عکس</button>
+                    @*<button type="button" class="btn btn-info btn-lg">ذخیره</button>*@
+                    <input type="submit" value="ذخیره" class="btn btn-info btn-lg" />
+                </div>
+            </div>
+            <div class="BodyDivUpload">
+                <img id="blah" src="../Image/" />
+            </div>
+        </form>
+    </div>
+</div>

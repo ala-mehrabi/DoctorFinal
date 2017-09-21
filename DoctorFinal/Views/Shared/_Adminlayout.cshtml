@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/Index.css" rel="stylesheet" />
+    <link href="~/Content/IndexLog.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="~/Content/persianDatepicker-default.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/js/persianDatepicker.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="js/IndexLog.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @if (IsSectionDefined("ViewScript"))
+    {
+        @RenderSection("ViewScript");
+    }
+    <script>
+
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="AdminTopDiv">
+
+            </div>
+        </div>
+        @*/////////////////////////////////////////////////*@
+        <div class="row">
+            <div class="col-sm-10" style="height:900px;font-family:'B Yekan';text-align:center;background-color:#e9e9e9;">
+                @RenderBody()
+            </div>
+            <div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
+                <div class="DivLeft">
+                    <ul class="LeftUl">
+                        <li class="LeftLi dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" title="اطلاعات پایه">
+                                <i class="fa fa-cog fa-fw"></i>  اطلاعات پایه
+                            </a>
+                            <ul class="SubMenu dropdown-menu">
+                                <li><a href="../CommidityType/Index"> گروه کالا</a></li>
+                                <li><a href="../Commidity/Index"> کالا </a></li>
+                                <li><a href="../Ostan/Index"> استان </a></li>
+                                <li><a href="../Shahrestan/Index"> شهرستان </a></li>
+                            </ul>
+                        </li>
+                        <li class="LeftLi dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" title="پیام ها">
+                                <i class="glyphicon glyphicon-envelope"></i>
+                                <span>پیام ها</span>
+                                <span class="bs-badge badge-danger" style="color:red;float:right;">New</span>
+                            </a>
+                            <ul class="SubMenu dropdown-menu">
+                                <li><a href="../SellNoskhe/Index">لیست سفارش های جدید</a></li>
+                            </ul>
+                        </li>
+                        <li class="LeftLi dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" title="پست ها">
+                                <i class="glyphicon glyphicon-envelope"></i>
+                                <span>پست ها</span>
+                                <span class="bs-badge badge-danger" style="color:red;float:right;">New</span>
+                            </a>
+                            <ul class="SubMenu dropdown-menu">
+                                <li><a href="../Post/Register">ایجاد پست</a></li>
+                                <li><a href="../Post/Register">مشاهده پست</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

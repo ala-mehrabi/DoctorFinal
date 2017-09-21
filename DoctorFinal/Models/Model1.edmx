@@ -1,0 +1,1016 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NewDoctorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Commidity">
+          <Key>
+            <PropertyRef Name="CommidityID" />
+          </Key>
+          <Property Name="CommidityID" Type="int" Nullable="false" />
+          <Property Name="CommidityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CommidityDetile" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CommidityTypeID" Type="int" Nullable="false" />
+          <Property Name="CommidityPrice" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommidityType">
+          <Key>
+            <PropertyRef Name="CommidityTypeID" />
+          </Key>
+          <Property Name="CommidityTypeID" Type="int" Nullable="false" />
+          <Property Name="CommidityTypeDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="CustomerFullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NationalCode" Type="bigint" Nullable="false" />
+          <Property Name="CustomerTel" Type="bigint" Nullable="false" />
+          <Property Name="CustomerMobile" Type="bigint" Nullable="false" />
+          <Property Name="CustomerCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DoctorID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerInfo">
+          <Key>
+            <PropertyRef Name="CustomerInfoID" />
+          </Key>
+          <Property Name="CustomerInfoID" Type="int" Nullable="false" />
+          <Property Name="CustomerInfoPicName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerInfoData" Type="image" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="CustomerInfoVazn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerInfoGhad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerInfoRegDate" Type="datetime" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ContentType" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="DoctorID" />
+          </Key>
+          <Property Name="DoctorID" Type="int" Nullable="false" />
+          <Property Name="DoctorFullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoctorTel" Type="bigint" Nullable="false" />
+          <Property Name="DoctorMobile" Type="bigint" Nullable="false" />
+          <Property Name="DoctorEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoctorDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoctorNumber" Type="bigint" Nullable="false" />
+          <Property Name="DoctorAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ShahrestanID" Type="int" Nullable="false" />
+          <Property Name="DoctorPassWord" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DoctorComInfo">
+          <Key>
+            <PropertyRef Name="DoctorComInfoID" />
+          </Key>
+          <Property Name="DoctorComInfoID" Type="int" Nullable="false" />
+          <Property Name="DoctorComInfoName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoctorComInfoSize" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoctorNewCommidityID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DoctorNewCommidity">
+          <Key>
+            <PropertyRef Name="DoctorNewCommidityID" />
+          </Key>
+          <Property Name="DoctorNewCommidityID" Type="int" Nullable="false" />
+          <Property Name="DoctorNewCommidityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoctorNewCommidityProperty" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DoctorNewCommidityIndication" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DoctorNewCommidityUnIndication" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SellToAnother" Type="bit" Nullable="false" />
+          <Property Name="SendToAdvertising" Type="bit" Nullable="false" />
+          <Property Name="HowToUse" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DoctorID" Type="int" Nullable="false" />
+          <Property Name="DoctorNewCommidityDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Noskhe">
+          <Key>
+            <PropertyRef Name="NoskheID" />
+          </Key>
+          <Property Name="NoskheID" Type="int" Nullable="false" />
+          <Property Name="NoskheCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NoskheDate" Type="date" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="NoskhePrice" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NoskheCommidity">
+          <Key>
+            <PropertyRef Name="NoskheID" />
+            <PropertyRef Name="CommidityID" />
+          </Key>
+          <Property Name="NoskheID" Type="int" Nullable="false" />
+          <Property Name="CommidityID" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="PriceInDay" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ostan">
+          <Key>
+            <PropertyRef Name="OstanID" />
+          </Key>
+          <Property Name="OstanID" Type="int" Nullable="false" />
+          <Property Name="OstanName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="int" Nullable="false" />
+          <Property Name="PostTitle" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostDetile" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostBody" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PostImageData" Type="image" Nullable="false" />
+          <Property Name="PostFileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PostContentType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sabeghe">
+          <Key>
+            <PropertyRef Name="SabegheID" />
+          </Key>
+          <Property Name="SabegheID" Type="int" Nullable="false" />
+          <Property Name="SabegheDateNow" Type="date" Nullable="false" />
+          <Property Name="SabegheDateAfter" Type="date" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SellNoskhe">
+          <Key>
+            <PropertyRef Name="SellNoskheID" />
+          </Key>
+          <Property Name="SellNoskheID" Type="int" Nullable="false" />
+          <Property Name="SellNoskheDate" Type="date" Nullable="false" />
+          <Property Name="SellNoskheIsCheck" Type="bit" Nullable="false" />
+          <Property Name="NoskheID" Type="int" Nullable="false" />
+          <Property Name="DoctorID" Type="int" Nullable="false" />
+          <Property Name="DoctorInCome" Type="bigint" Nullable="false" />
+          <Property Name="CustomerFullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerMobile" Type="bigint" Nullable="false" />
+          <Property Name="CustomerAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shahrestan">
+          <Key>
+            <PropertyRef Name="ShahrestanID" />
+          </Key>
+          <Property Name="ShahrestanID" Type="int" Nullable="false" />
+          <Property Name="ShahrestanName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OstanID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Commidity_CommidityType">
+          <End Role="CommidityType" Type="Self.CommidityType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Commidity" Type="Self.Commidity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CommidityType">
+              <PropertyRef Name="CommidityTypeID" />
+            </Principal>
+            <Dependent Role="Commidity">
+              <PropertyRef Name="CommidityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerInfo_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CustomerInfo" Type="Self.CustomerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CustomerInfo">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctor_Shahrestan">
+          <End Role="Shahrestan" Type="Self.Shahrestan" Multiplicity="1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shahrestan">
+              <PropertyRef Name="ShahrestanID" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="ShahrestanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorComInfo_DoctorNewCommidity">
+          <End Role="DoctorNewCommidity" Type="Self.DoctorNewCommidity" Multiplicity="1" />
+          <End Role="DoctorComInfo" Type="Self.DoctorComInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorNewCommidity">
+              <PropertyRef Name="DoctorNewCommidityID" />
+            </Principal>
+            <Dependent Role="DoctorComInfo">
+              <PropertyRef Name="DoctorNewCommidityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorNewCommidity_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="DoctorNewCommidity" Type="Self.DoctorNewCommidity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="DoctorNewCommidity">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Noskhe_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Noskhe" Type="Self.Noskhe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Noskhe">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NoskheCommidity_Commidity">
+          <End Role="Commidity" Type="Self.Commidity" Multiplicity="1" />
+          <End Role="NoskheCommidity" Type="Self.NoskheCommidity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commidity">
+              <PropertyRef Name="CommidityID" />
+            </Principal>
+            <Dependent Role="NoskheCommidity">
+              <PropertyRef Name="CommidityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NoskheCommidity_Noskhe">
+          <End Role="Noskhe" Type="Self.Noskhe" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NoskheCommidity" Type="Self.NoskheCommidity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Noskhe">
+              <PropertyRef Name="NoskheID" />
+            </Principal>
+            <Dependent Role="NoskheCommidity">
+              <PropertyRef Name="NoskheID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sabeghe_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sabeghe" Type="Self.Sabeghe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Sabeghe">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SellNoskhe_Noskhe">
+          <End Role="Noskhe" Type="Self.Noskhe" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SellNoskhe" Type="Self.SellNoskhe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Noskhe">
+              <PropertyRef Name="NoskheID" />
+            </Principal>
+            <Dependent Role="SellNoskhe">
+              <PropertyRef Name="NoskheID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shahrestan_Ostan">
+          <End Role="Ostan" Type="Self.Ostan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shahrestan" Type="Self.Shahrestan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ostan">
+              <PropertyRef Name="OstanID" />
+            </Principal>
+            <Dependent Role="Shahrestan">
+              <PropertyRef Name="OstanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewDoctorModelStoreContainer">
+          <EntitySet Name="Commidity" EntityType="Self.Commidity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommidityType" EntityType="Self.CommidityType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerInfo" EntityType="Self.CustomerInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorComInfo" EntityType="Self.DoctorComInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorNewCommidity" EntityType="Self.DoctorNewCommidity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Noskhe" EntityType="Self.Noskhe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NoskheCommidity" EntityType="Self.NoskheCommidity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ostan" EntityType="Self.Ostan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sabeghe" EntityType="Self.Sabeghe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SellNoskhe" EntityType="Self.SellNoskhe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shahrestan" EntityType="Self.Shahrestan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Commidity_CommidityType" Association="Self.FK_Commidity_CommidityType">
+            <End Role="CommidityType" EntitySet="CommidityType" />
+            <End Role="Commidity" EntitySet="Commidity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Doctor" Association="Self.FK_Customer_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerInfo_Customer" Association="Self.FK_CustomerInfo_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerInfo" EntitySet="CustomerInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctor_Shahrestan" Association="Self.FK_Doctor_Shahrestan">
+            <End Role="Shahrestan" EntitySet="Shahrestan" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorComInfo_DoctorNewCommidity" Association="Self.FK_DoctorComInfo_DoctorNewCommidity">
+            <End Role="DoctorNewCommidity" EntitySet="DoctorNewCommidity" />
+            <End Role="DoctorComInfo" EntitySet="DoctorComInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorNewCommidity_Doctor" Association="Self.FK_DoctorNewCommidity_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="DoctorNewCommidity" EntitySet="DoctorNewCommidity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Noskhe_Customer" Association="Self.FK_Noskhe_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Noskhe" EntitySet="Noskhe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NoskheCommidity_Commidity" Association="Self.FK_NoskheCommidity_Commidity">
+            <End Role="Commidity" EntitySet="Commidity" />
+            <End Role="NoskheCommidity" EntitySet="NoskheCommidity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NoskheCommidity_Noskhe" Association="Self.FK_NoskheCommidity_Noskhe">
+            <End Role="Noskhe" EntitySet="Noskhe" />
+            <End Role="NoskheCommidity" EntitySet="NoskheCommidity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sabeghe_Customer" Association="Self.FK_Sabeghe_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Sabeghe" EntitySet="Sabeghe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SellNoskhe_Noskhe" Association="Self.FK_SellNoskhe_Noskhe">
+            <End Role="Noskhe" EntitySet="Noskhe" />
+            <End Role="SellNoskhe" EntitySet="SellNoskhe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shahrestan_Ostan" Association="Self.FK_Shahrestan_Ostan">
+            <End Role="Ostan" EntitySet="Ostan" />
+            <End Role="Shahrestan" EntitySet="Shahrestan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NewDoctorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="DoctorID" />
+          </Key>
+          <Property Name="DoctorID" Type="Int32" Nullable="false" />
+          <Property Name="DoctorFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoctorTel" Type="Int64" Nullable="false" />
+          <Property Name="DoctorMobile" Type="Int64" Nullable="false" />
+          <Property Name="DoctorEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoctorDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoctorNumber" Type="Int64" Nullable="false" />
+          <Property Name="DoctorAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShahrestanID" Type="Int32" Nullable="false" />
+          <Property Name="DoctorPassWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Shahrestan" Relationship="Self.FK_Doctor_Shahrestan" FromRole="Doctor" ToRole="Shahrestan" />
+          <NavigationProperty Name="Customer" Relationship="NewDoctorModel.FK_Customer_Doctor" FromRole="Doctor" ToRole="Customer" />
+          <NavigationProperty Name="DoctorNewCommidity" Relationship="NewDoctorModel.FK_DoctorNewCommidity_Doctor" FromRole="Doctor" ToRole="DoctorNewCommidity" />
+        </EntityType>
+        <EntityType Name="Ostan">
+          <Key>
+            <PropertyRef Name="OstanID" />
+          </Key>
+          <Property Name="OstanID" Type="Int32" Nullable="false" />
+          <Property Name="OstanName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Shahrestan" Relationship="Self.FK_Shahrestan_Ostan" FromRole="Ostan" ToRole="Shahrestan" />
+        </EntityType>
+        <EntityType Name="Shahrestan">
+          <Key>
+            <PropertyRef Name="ShahrestanID" />
+          </Key>
+          <Property Name="ShahrestanID" Type="Int32" Nullable="false" />
+          <Property Name="ShahrestanName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OstanID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Doctor_Shahrestan" FromRole="Shahrestan" ToRole="Doctor" />
+          <NavigationProperty Name="Ostan" Relationship="Self.FK_Shahrestan_Ostan" FromRole="Shahrestan" ToRole="Ostan" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Doctor_Shahrestan">
+          <End Role="Shahrestan" Type="Self.Shahrestan" Multiplicity="1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shahrestan">
+              <PropertyRef Name="ShahrestanID" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="ShahrestanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shahrestan_Ostan">
+          <End Role="Ostan" Type="Self.Ostan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Shahrestan" Type="Self.Shahrestan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ostan">
+              <PropertyRef Name="OstanID" />
+            </Principal>
+            <Dependent Role="Shahrestan">
+              <PropertyRef Name="OstanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewDoctorEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" />
+          <EntitySet Name="Ostan" EntityType="Self.Ostan" />
+          <EntitySet Name="Shahrestan" EntityType="Self.Shahrestan" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Doctor_Shahrestan" Association="Self.FK_Doctor_Shahrestan">
+            <End Role="Shahrestan" EntitySet="Shahrestan" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shahrestan_Ostan" Association="Self.FK_Shahrestan_Ostan">
+            <End Role="Ostan" EntitySet="Ostan" />
+            <End Role="Shahrestan" EntitySet="Shahrestan" />
+          </AssociationSet>
+          <EntitySet Name="Customer" EntityType="NewDoctorModel.Customer" />
+          <AssociationSet Name="FK_Customer_Doctor" Association="NewDoctorModel.FK_Customer_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <EntitySet Name="Commidity" EntityType="NewDoctorModel.Commidity" />
+          <EntitySet Name="CommidityType" EntityType="NewDoctorModel.CommidityType" />
+          <EntitySet Name="Noskhe" EntityType="NewDoctorModel.Noskhe" />
+          <EntitySet Name="NoskheCommidity" EntityType="NewDoctorModel.NoskheCommidity" />
+          <AssociationSet Name="FK_Commidity_CommidityType" Association="NewDoctorModel.FK_Commidity_CommidityType">
+            <End Role="CommidityType" EntitySet="CommidityType" />
+            <End Role="Commidity" EntitySet="Commidity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NoskheCommidity_Commidity" Association="NewDoctorModel.FK_NoskheCommidity_Commidity">
+            <End Role="Commidity" EntitySet="Commidity" />
+            <End Role="NoskheCommidity" EntitySet="NoskheCommidity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Noskhe_Customer" Association="NewDoctorModel.FK_Noskhe_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Noskhe" EntitySet="Noskhe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NoskheCommidity_Noskhe" Association="NewDoctorModel.FK_NoskheCommidity_Noskhe">
+            <End Role="Noskhe" EntitySet="Noskhe" />
+            <End Role="NoskheCommidity" EntitySet="NoskheCommidity" />
+          </AssociationSet>
+          <EntitySet Name="Sabeghe" EntityType="NewDoctorModel.Sabeghe" />
+          <AssociationSet Name="FK_Sabeghe_Customer" Association="NewDoctorModel.FK_Sabeghe_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Sabeghe" EntitySet="Sabeghe" />
+          </AssociationSet>
+          <EntitySet Name="DoctorComInfo" EntityType="NewDoctorModel.DoctorComInfo" />
+          <EntitySet Name="DoctorNewCommidity" EntityType="NewDoctorModel.DoctorNewCommidity" />
+          <AssociationSet Name="FK_DoctorNewCommidity_Doctor" Association="NewDoctorModel.FK_DoctorNewCommidity_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="DoctorNewCommidity" EntitySet="DoctorNewCommidity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorComInfo_DoctorNewCommidity" Association="NewDoctorModel.FK_DoctorComInfo_DoctorNewCommidity">
+            <End Role="DoctorNewCommidity" EntitySet="DoctorNewCommidity" />
+            <End Role="DoctorComInfo" EntitySet="DoctorComInfo" />
+          </AssociationSet>
+          <EntitySet Name="SellNoskhe" EntityType="NewDoctorModel.SellNoskhe" />
+          <AssociationSet Name="FK_SellNoskhe_Noskhe" Association="NewDoctorModel.FK_SellNoskhe_Noskhe">
+            <End Role="Noskhe" EntitySet="Noskhe" />
+            <End Role="SellNoskhe" EntitySet="SellNoskhe" />
+          </AssociationSet>
+          <EntitySet Name="CustomerInfo" EntityType="NewDoctorModel.CustomerInfo" />
+          <AssociationSet Name="FK_CustomerInfo_Customer" Association="NewDoctorModel.FK_CustomerInfo_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerInfo" EntitySet="CustomerInfo" />
+          </AssociationSet>
+          <EntitySet Name="Post" EntityType="NewDoctorModel.Post" />
+          </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerFullName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NationalCode" Type="Int64" Nullable="false" />
+          <Property Name="CustomerTel" Type="Int64" Nullable="false" />
+          <Property Name="CustomerMobile" Type="Int64" Nullable="false" />
+          <Property Name="CustomerCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="NewDoctorModel.FK_Customer_Doctor" FromRole="Customer" ToRole="Doctor" />
+          <NavigationProperty Name="Noskhe" Relationship="NewDoctorModel.FK_Noskhe_Customer" FromRole="Customer" ToRole="Noskhe" />
+          <NavigationProperty Name="Sabeghe" Relationship="NewDoctorModel.FK_Sabeghe_Customer" FromRole="Customer" ToRole="Sabeghe" />
+          <NavigationProperty Name="CustomerInfo" Relationship="NewDoctorModel.FK_CustomerInfo_Customer" FromRole="Customer" ToRole="CustomerInfo" />
+        </EntityType>
+        <Association Name="FK_Customer_Doctor">
+          <End Type="NewDoctorModel.Doctor" Role="Doctor" Multiplicity="1" />
+          <End Type="NewDoctorModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Commidity">
+          <Key>
+            <PropertyRef Name="CommidityID" />
+          </Key>
+          <Property Name="CommidityID" Type="Int32" Nullable="false" />
+          <Property Name="CommidityName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CommidityDetile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CommidityTypeID" Type="Int32" Nullable="false" />
+          <Property Name="CommidityPrice" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CommidityType" Relationship="NewDoctorModel.FK_Commidity_CommidityType" FromRole="Commidity" ToRole="CommidityType" />
+          <NavigationProperty Name="NoskheCommidity" Relationship="NewDoctorModel.FK_NoskheCommidity_Commidity" FromRole="Commidity" ToRole="NoskheCommidity" />
+        </EntityType>
+        <EntityType Name="CommidityType">
+          <Key>
+            <PropertyRef Name="CommidityTypeID" />
+          </Key>
+          <Property Name="CommidityTypeID" Type="Int32" Nullable="false" />
+          <Property Name="CommidityTypeDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Commidity" Relationship="NewDoctorModel.FK_Commidity_CommidityType" FromRole="CommidityType" ToRole="Commidity" />
+        </EntityType>
+        <EntityType Name="Noskhe">
+          <Key>
+            <PropertyRef Name="NoskheID" />
+          </Key>
+          <Property Name="NoskheID" Type="Int32" Nullable="false" />
+          <Property Name="NoskheCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoskheDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="NoskhePrice" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="NewDoctorModel.FK_Noskhe_Customer" FromRole="Noskhe" ToRole="Customer" />
+          <NavigationProperty Name="NoskheCommidity" Relationship="NewDoctorModel.FK_NoskheCommidity_Noskhe" FromRole="Noskhe" ToRole="NoskheCommidity" />
+          <NavigationProperty Name="SellNoskhe" Relationship="NewDoctorModel.FK_SellNoskhe_Noskhe" FromRole="Noskhe" ToRole="SellNoskhe" />
+        </EntityType>
+        <EntityType Name="NoskheCommidity">
+          <Key>
+            <PropertyRef Name="NoskheID" />
+            <PropertyRef Name="CommidityID" />
+          </Key>
+          <Property Name="NoskheID" Type="Int32" Nullable="false" />
+          <Property Name="CommidityID" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="PriceInDay" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Commidity" Relationship="NewDoctorModel.FK_NoskheCommidity_Commidity" FromRole="NoskheCommidity" ToRole="Commidity" />
+          <NavigationProperty Name="Noskhe" Relationship="NewDoctorModel.FK_NoskheCommidity_Noskhe" FromRole="NoskheCommidity" ToRole="Noskhe" />
+        </EntityType>
+        <Association Name="FK_Commidity_CommidityType">
+          <End Type="NewDoctorModel.CommidityType" Role="CommidityType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="NewDoctorModel.Commidity" Role="Commidity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CommidityType">
+              <PropertyRef Name="CommidityTypeID" />
+            </Principal>
+            <Dependent Role="Commidity">
+              <PropertyRef Name="CommidityTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NoskheCommidity_Commidity">
+          <End Type="NewDoctorModel.Commidity" Role="Commidity" Multiplicity="1" />
+          <End Type="NewDoctorModel.NoskheCommidity" Role="NoskheCommidity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commidity">
+              <PropertyRef Name="CommidityID" />
+            </Principal>
+            <Dependent Role="NoskheCommidity">
+              <PropertyRef Name="CommidityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Noskhe_Customer">
+          <End Type="NewDoctorModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="NewDoctorModel.Noskhe" Role="Noskhe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Noskhe">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NoskheCommidity_Noskhe">
+          <End Type="NewDoctorModel.Noskhe" Role="Noskhe" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="NewDoctorModel.NoskheCommidity" Role="NoskheCommidity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Noskhe">
+              <PropertyRef Name="NoskheID" />
+            </Principal>
+            <Dependent Role="NoskheCommidity">
+              <PropertyRef Name="NoskheID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sabeghe">
+          <Key>
+            <PropertyRef Name="SabegheID" />
+          </Key>
+          <Property Name="SabegheID" Type="Int32" Nullable="false" />
+          <Property Name="SabegheDateNow" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SabegheDateAfter" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="NewDoctorModel.FK_Sabeghe_Customer" FromRole="Sabeghe" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK_Sabeghe_Customer">
+          <End Type="NewDoctorModel.Customer" Role="Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="NewDoctorModel.Sabeghe" Role="Sabeghe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Sabeghe">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DoctorComInfo">
+          <Key>
+            <PropertyRef Name="DoctorComInfoID" />
+          </Key>
+          <Property Name="DoctorComInfoID" Type="Int32" Nullable="false" />
+          <Property Name="DoctorComInfoName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorComInfoSize" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorNewCommidityID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DoctorNewCommidity" Relationship="NewDoctorModel.FK_DoctorComInfo_DoctorNewCommidity" FromRole="DoctorComInfo" ToRole="DoctorNewCommidity" />
+        </EntityType>
+        <EntityType Name="DoctorNewCommidity">
+          <Key>
+            <PropertyRef Name="DoctorNewCommidityID" />
+          </Key>
+          <Property Name="DoctorNewCommidityID" Type="Int32" Nullable="false" />
+          <Property Name="DoctorNewCommidityName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorNewCommidityProperty" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorNewCommidityIndication" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorNewCommidityUnIndication" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SellToAnother" Type="Boolean" Nullable="false" />
+          <Property Name="SendToAdvertising" Type="Boolean" Nullable="false" />
+          <Property Name="HowToUse" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorID" Type="Int32" Nullable="false" />
+          <Property Name="DoctorNewCommidityDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Doctor" Relationship="NewDoctorModel.FK_DoctorNewCommidity_Doctor" FromRole="DoctorNewCommidity" ToRole="Doctor" />
+          <NavigationProperty Name="DoctorComInfo" Relationship="NewDoctorModel.FK_DoctorComInfo_DoctorNewCommidity" FromRole="DoctorNewCommidity" ToRole="DoctorComInfo" />
+        </EntityType>
+        <Association Name="FK_DoctorNewCommidity_Doctor">
+          <End Type="NewDoctorModel.Doctor" Role="Doctor" Multiplicity="1" />
+          <End Type="NewDoctorModel.DoctorNewCommidity" Role="DoctorNewCommidity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="DoctorNewCommidity">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorComInfo_DoctorNewCommidity">
+          <End Type="NewDoctorModel.DoctorNewCommidity" Role="DoctorNewCommidity" Multiplicity="1" />
+          <End Type="NewDoctorModel.DoctorComInfo" Role="DoctorComInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorNewCommidity">
+              <PropertyRef Name="DoctorNewCommidityID" />
+            </Principal>
+            <Dependent Role="DoctorComInfo">
+              <PropertyRef Name="DoctorNewCommidityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SellNoskhe">
+          <Key>
+            <PropertyRef Name="SellNoskheID" />
+          </Key>
+          <Property Name="SellNoskheID" Type="Int32" Nullable="false" />
+          <Property Name="SellNoskheDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SellNoskheIsCheck" Type="Boolean" Nullable="false" />
+          <Property Name="NoskheID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Noskhe" Relationship="NewDoctorModel.FK_SellNoskhe_Noskhe" FromRole="SellNoskhe" ToRole="Noskhe" />
+          <Property Name="DoctorID" Type="Int32" Nullable="false" />
+          <Property Name="DoctorInCome" Type="Int64" Nullable="false" />
+          <Property Name="CustomerFullName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerMobile" Type="Int64" Nullable="false" />
+          <Property Name="CustomerAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SellNoskhe_Noskhe">
+          <End Type="NewDoctorModel.Noskhe" Role="Noskhe" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="NewDoctorModel.SellNoskhe" Role="SellNoskhe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Noskhe">
+              <PropertyRef Name="NoskheID" />
+            </Principal>
+            <Dependent Role="SellNoskhe">
+              <PropertyRef Name="NoskheID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CustomerInfo">
+          <Key>
+            <PropertyRef Name="CustomerInfoID" />
+          </Key>
+          <Property Name="CustomerInfoID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerInfoPicName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerInfoData" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="NewDoctorModel.FK_CustomerInfo_Customer" FromRole="CustomerInfo" ToRole="Customer" />
+          <Property Name="CustomerInfoVazn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerInfoGhad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerInfoRegDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContentType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_CustomerInfo_Customer">
+          <End Type="NewDoctorModel.Customer" Role="Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="NewDoctorModel.CustomerInfo" Role="CustomerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CustomerInfo">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="Int32" Nullable="false" />
+          <Property Name="PostTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostDetile" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostBody" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostImageData" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="PostFileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostContentType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NewDoctorModelStoreContainer" CdmEntityContainer="NewDoctorEntities">
+          <EntitySetMapping Name="Doctor">
+            <EntityTypeMapping TypeName="NewDoctorModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="DoctorFullName" ColumnName="DoctorFullName" />
+                <ScalarProperty Name="DoctorTel" ColumnName="DoctorTel" />
+                <ScalarProperty Name="DoctorMobile" ColumnName="DoctorMobile" />
+                <ScalarProperty Name="DoctorEmail" ColumnName="DoctorEmail" />
+                <ScalarProperty Name="DoctorDescription" ColumnName="DoctorDescription" />
+                <ScalarProperty Name="DoctorNumber" ColumnName="DoctorNumber" />
+                <ScalarProperty Name="DoctorAddress" ColumnName="DoctorAddress" />
+                <ScalarProperty Name="ShahrestanID" ColumnName="ShahrestanID" />
+                <ScalarProperty Name="DoctorPassWord" ColumnName="DoctorPassWord" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ostan">
+            <EntityTypeMapping TypeName="NewDoctorModel.Ostan">
+              <MappingFragment StoreEntitySet="Ostan">
+                <ScalarProperty Name="OstanID" ColumnName="OstanID" />
+                <ScalarProperty Name="OstanName" ColumnName="OstanName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shahrestan">
+            <EntityTypeMapping TypeName="NewDoctorModel.Shahrestan">
+              <MappingFragment StoreEntitySet="Shahrestan">
+                <ScalarProperty Name="ShahrestanID" ColumnName="ShahrestanID" />
+                <ScalarProperty Name="ShahrestanName" ColumnName="ShahrestanName" />
+                <ScalarProperty Name="OstanID" ColumnName="OstanID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="NewDoctorModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="NewDoctorModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+                <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
+                <ScalarProperty Name="CustomerMobile" ColumnName="CustomerMobile" />
+                <ScalarProperty Name="CustomerTel" ColumnName="CustomerTel" />
+                <ScalarProperty Name="NationalCode" ColumnName="NationalCode" />
+                <ScalarProperty Name="CustomerFullName" ColumnName="CustomerFullName" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commidity">
+            <EntityTypeMapping TypeName="NewDoctorModel.Commidity">
+              <MappingFragment StoreEntitySet="Commidity">
+                <ScalarProperty Name="CommidityPrice" ColumnName="CommidityPrice" />
+                <ScalarProperty Name="CommidityTypeID" ColumnName="CommidityTypeID" />
+                <ScalarProperty Name="CommidityDetile" ColumnName="CommidityDetile" />
+                <ScalarProperty Name="CommidityName" ColumnName="CommidityName" />
+                <ScalarProperty Name="CommidityID" ColumnName="CommidityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommidityType">
+            <EntityTypeMapping TypeName="NewDoctorModel.CommidityType">
+              <MappingFragment StoreEntitySet="CommidityType">
+                <ScalarProperty Name="CommidityTypeDescription" ColumnName="CommidityTypeDescription" />
+                <ScalarProperty Name="CommidityTypeID" ColumnName="CommidityTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Noskhe">
+            <EntityTypeMapping TypeName="NewDoctorModel.Noskhe">
+              <MappingFragment StoreEntitySet="Noskhe">
+                <ScalarProperty Name="NoskhePrice" ColumnName="NoskhePrice" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="NoskheDate" ColumnName="NoskheDate" />
+                <ScalarProperty Name="NoskheCode" ColumnName="NoskheCode" />
+                <ScalarProperty Name="NoskheID" ColumnName="NoskheID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NoskheCommidity">
+            <EntityTypeMapping TypeName="NewDoctorModel.NoskheCommidity">
+              <MappingFragment StoreEntitySet="NoskheCommidity">
+                <ScalarProperty Name="PriceInDay" ColumnName="PriceInDay" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="CommidityID" ColumnName="CommidityID" />
+                <ScalarProperty Name="NoskheID" ColumnName="NoskheID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sabeghe">
+            <EntityTypeMapping TypeName="NewDoctorModel.Sabeghe">
+              <MappingFragment StoreEntitySet="Sabeghe">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="SabegheDateAfter" ColumnName="SabegheDateAfter" />
+                <ScalarProperty Name="SabegheDateNow" ColumnName="SabegheDateNow" />
+                <ScalarProperty Name="SabegheID" ColumnName="SabegheID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorComInfo">
+            <EntityTypeMapping TypeName="NewDoctorModel.DoctorComInfo">
+              <MappingFragment StoreEntitySet="DoctorComInfo">
+                <ScalarProperty Name="DoctorNewCommidityID" ColumnName="DoctorNewCommidityID" />
+                <ScalarProperty Name="DoctorComInfoSize" ColumnName="DoctorComInfoSize" />
+                <ScalarProperty Name="DoctorComInfoName" ColumnName="DoctorComInfoName" />
+                <ScalarProperty Name="DoctorComInfoID" ColumnName="DoctorComInfoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorNewCommidity">
+            <EntityTypeMapping TypeName="NewDoctorModel.DoctorNewCommidity">
+              <MappingFragment StoreEntitySet="DoctorNewCommidity">
+                <ScalarProperty Name="DoctorNewCommidityDate" ColumnName="DoctorNewCommidityDate" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="HowToUse" ColumnName="HowToUse" />
+                <ScalarProperty Name="SendToAdvertising" ColumnName="SendToAdvertising" />
+                <ScalarProperty Name="SellToAnother" ColumnName="SellToAnother" />
+                <ScalarProperty Name="DoctorNewCommidityUnIndication" ColumnName="DoctorNewCommidityUnIndication" />
+                <ScalarProperty Name="DoctorNewCommidityIndication" ColumnName="DoctorNewCommidityIndication" />
+                <ScalarProperty Name="DoctorNewCommidityProperty" ColumnName="DoctorNewCommidityProperty" />
+                <ScalarProperty Name="DoctorNewCommidityName" ColumnName="DoctorNewCommidityName" />
+                <ScalarProperty Name="DoctorNewCommidityID" ColumnName="DoctorNewCommidityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SellNoskhe">
+            <EntityTypeMapping TypeName="NewDoctorModel.SellNoskhe">
+              <MappingFragment StoreEntitySet="SellNoskhe">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+                <ScalarProperty Name="CustomerMobile" ColumnName="CustomerMobile" />
+                <ScalarProperty Name="CustomerFullName" ColumnName="CustomerFullName" />
+                <ScalarProperty Name="DoctorInCome" ColumnName="DoctorInCome" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="NoskheID" ColumnName="NoskheID" />
+                <ScalarProperty Name="SellNoskheIsCheck" ColumnName="SellNoskheIsCheck" />
+                <ScalarProperty Name="SellNoskheDate" ColumnName="SellNoskheDate" />
+                <ScalarProperty Name="SellNoskheID" ColumnName="SellNoskheID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerInfo">
+            <EntityTypeMapping TypeName="NewDoctorModel.CustomerInfo">
+              <MappingFragment StoreEntitySet="CustomerInfo">
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="CustomerInfoRegDate" ColumnName="CustomerInfoRegDate" />
+                <ScalarProperty Name="CustomerInfoGhad" ColumnName="CustomerInfoGhad" />
+                <ScalarProperty Name="CustomerInfoVazn" ColumnName="CustomerInfoVazn" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerInfoData" ColumnName="CustomerInfoData" />
+                <ScalarProperty Name="CustomerInfoPicName" ColumnName="CustomerInfoPicName" />
+                <ScalarProperty Name="CustomerInfoID" ColumnName="CustomerInfoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post">
+            <EntityTypeMapping TypeName="NewDoctorModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="PostContentType" ColumnName="PostContentType" />
+                <ScalarProperty Name="PostFileName" ColumnName="PostFileName" />
+                <ScalarProperty Name="PostImageData" ColumnName="PostImageData" />
+                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+                <ScalarProperty Name="PostBody" ColumnName="PostBody" />
+                <ScalarProperty Name="PostDetile" ColumnName="PostDetile" />
+                <ScalarProperty Name="PostTitle" ColumnName="PostTitle" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

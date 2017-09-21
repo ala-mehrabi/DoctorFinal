@@ -1,0 +1,64 @@
+﻿@model DoctorFinal.Models.Doctor
+
+@{
+    ViewBag.Title = " پنل مدیریت-ویرایش اطلاعات ";
+    Layout = "~/Views/Shared/_doctorlayout.cshtml";
+}
+<div class="MainDiv">
+    <div class="BodyDivEditDoc">
+        <form class="form-horizontal" action="Edit" method="post">
+            <input type="hidden" id="CustomerID" name="CustomerID" value="@Model.DoctorID" />
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="DoctorFullName">نام و نام خانوادگی:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="DoctorFullName" name="DoctorFullName" value="@Model.DoctorFullName" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="DoctorTel">تلفن:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="DoctorTel" name="DoctorTel" value="@Model.DoctorTel" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="DoctorMobile">موبایل:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="DoctorMobile" name="DoctorMobile" value="@Model.DoctorMobile">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="DoctorEmail">ایمیل:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="DoctorEmail" name="DoctorEmail" value="@Model.DoctorEmail">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="DoctorDescription">رسته کاری:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="DoctorDescription" name="DoctorDescription" value="@Model.DoctorDescription">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="DoctorNumber">کد نظام پزشکی:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="DoctorNumber" name="DoctorNumber" value="@Model.DoctorNumber">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="DoctorAddress">آدرس:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="DoctorAddress" name="DoctorAddress" value="@Model.DoctorAddress">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="DoctorPassWord">رمز کاربری:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="DoctorPassWord" name="DoctorPassWord" value="@Model.DoctorPassWord">
+                </div>
+            </div>
+            <div class="form-group">
+                <input id="Submit1" type="submit" value="ویرایش" class="btn btn-info" />
+            </div>
+        </form>
+    </div>
+</div>

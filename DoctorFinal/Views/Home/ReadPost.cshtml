@@ -1,0 +1,28 @@
+﻿@model IEnumerable<DoctorFinal.Models.ItemShow>
+@{
+    ViewBag.Title = " سامانه پزشکان-خانه ";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+@section ViewScript
+{
+    <script>
+
+    </script>
+}
+<div class="MainDiv">
+    <div class="ReadPostDiv">
+        @foreach (var item in Model)
+        {
+            <div class="HeaderReadPostDiv">
+                <a>@item.PTitle</a>
+            </div>
+            <div class="PicPostReadDiv">
+                <img src="@item.PImage" />
+            </div>
+            <div class="ReadPostDivBody">
+                <p>@item.PDetile</p>
+                <p>@item.PBody</p>
+            </div>
+        }
+    </div>
+</div>

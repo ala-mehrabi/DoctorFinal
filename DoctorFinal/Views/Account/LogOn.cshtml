@@ -1,0 +1,17 @@
+﻿@model DoctorFinal.Models.Doctor
+@{
+    ViewBag.Title = " سامانه پزشکان-ورود ";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<div class="MainDiv">
+    <div style="margin:50px 50px;width:100%;">
+        <div class="login">
+            <header class="login-header"><span class="text">ورود</span><span class="loader"></span></header>
+            <form class="login-form" action="LogOn" method="post" id="form1">
+                <input class="login-input" type="text" id="DoctorFullName" name="DoctorFullName" value="@Model.DoctorFullName" placeholder="کلمه کاربری" />
+                <input class="login-input" id="DoctorPassWord" name="DoctorPassWord" type="password" value="@Model.DoctorPassWord" placeholder="رمز عبور" />
+                <button class="login-btn" type="submit" id="Submit1">ورود</button>
+            </form>
+        </div>
+    </div>
+</div>

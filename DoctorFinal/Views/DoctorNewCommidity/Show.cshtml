@@ -1,0 +1,183 @@
+﻿@{
+    ViewBag.Title = " پنل مدیریت-ثبت دارو جدید ";
+    Layout = "~/Views/Shared/_doctorlayout.cshtml";
+}
+@section ViewScript
+{
+    <script>
+        $(function ()
+        {
+            $("#DoctorNewCommidityDate").persianDatepicker();
+        });
+        function NewCommidity() {
+
+            if (document.getElementById("SendToAdvertising").checked) {
+                document.getElementById("SendToAdvertising").value = 1;
+            }
+            else {
+                document.getElementById("SendToAdvertising").value = 0;
+            }
+
+            if (document.getElementById("SellToAnother").checked) {
+                document.getElementById("SellToAnother").value = 1;
+            }
+            else {
+                document.getElementById("SellToAnother").value = 0;
+            }
+
+            var data = "DoctorNewCommidityID=" + DoctorNewCommidityID.value + "&DoctorNewCommidityName=" + DoctorNewCommidityName.value + "&DoctorNewCommidityProperty=" + DoctorNewCommidityProperty.value + "&DoctorNewCommidityIndication=" + DoctorNewCommidityIndication.value + "&DoctorNewCommidityUnIndication=" + DoctorNewCommidityUnIndication.value + "&SellToAnother=" + SellToAnother.value + "&SendToAdvertising=" + SendToAdvertising.value + "&HowToUse=" + HowToUse.value + "&DoctorID=" + DoctorID.value;
+            var _httpreq = new XMLHttpRequest();
+            _httpreq.onreadystatechange = function () {
+                if (_httpreq.responseText == "ok") {
+                    alert("عملیات با موفقیت انجام شد");
+
+                }
+            }
+            _httpreq.open("Get", "RegisterNewDoctorCommidity?" + data, true);
+            _httpreq.send();
+            ShowAnotherDiv();
+        }
+        function ShowAnotherDiv() {
+            $("#li1").removeClass("active");
+            $("#li2").addClass("active");
+            $("#Menu1").css("display", "none");
+            $("#Menu2").css("display", "block");
+
+        }
+        function AddRow() {
+            var data = "DoctorComInfoID=" + DoctorComInfoID.value + "&DoctorComInfoName=" + DoctorComInfoName.value + "&DoctorComInfoSize=" + DoctorComInfoSize.value + "&DoctorNewCommidityID=" + DoctorNewCommidityID.value;
+            var _httpreq = new XMLHttpRequest();
+            _httpreq.onreadystatechange = function () {
+                if (_httpreq.responseText == "ok") {
+                    ShowTable();
+                }
+            }
+            _httpreq.open("Get", "Register?" + data, true);
+            _httpreq.send();
+        }
+        function ShowTable() {
+            var DocComName = document.getElementById("DoctorComInfoName");
+            var DocComSize = document.getElementById("DoctorComInfoSize");
+            var DocComID = document.getElementById("DoctorComInfoID");
+            var DocComNewID = document.getElementById("DoctorNewCommidityID");
+            var str = "<tr data-Comid='" + DocComID.value + "' >";
+            str += "<td class='CommidityName'>" + DocComName.value + "</td>";
+            str += "<td class='CommidityPrice'>" + DocComSize.value + "</td>";
+            str += "<td class='tdNumber' style='display:none'>" + DocComNewID.value + "</td>";
+            str += "</tr>";
+
+            $('#TBodyNewCom').append(str);
+            DocComID.value = DocComName.value = DocComSize.value = "";
+        }
+        function SaveDB()
+        {
+            alert("پس از بررسی مبلغ پایه , میزان سود مشارکت اعلام میگردد");
+        }
+    </script>
+}
+<div class="MainDiv">
+    <div class="MainComDoc">
+        <div class="topDiv">
+            <nav class="navbar navbar-default" style="background-color:white;">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav">
+                        <li id="li1" class="active"><a href="#menu1">ثبت دارو جدید</a></li>
+                        <li id="li2"><a href="#main2">جزئیات</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="Main1" id="Menu1">
+            <form class="form-horizontal" id="form1">
+                <input type="hidden" class="form-control" id="DoctorID" name="DoctorID" value="@Session["DoctorID"].ToString()">
+                <input type="hidden" class="form-control" id="DoctorNewCommidityID" name="DoctorNewCommidityID" value="@Session["DoctorNewCommidityID"].ToString()">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="DoctorNewCommidityName">نام دارو:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="DoctorNewCommidityName" name="DoctorNewCommidityName" placeholder="نام دارو" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="DoctorNewCommidityDate">تاريخ نسخه</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" id="DoctorNewCommidityDate" name="DoctorNewCommidityDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="DoctorNewCommidityProperty">خاصيت:</label>
+                    <div class="col-sm-10">
+                        <input required type="text" class="form-control" id="DoctorNewCommidityProperty" name="DoctorNewCommidityProperty" placeholder="خاصيت">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="DoctorNewCommidityIndication">موارد مصرف:</label>
+                    <div class="col-sm-10">
+                        <input required type="text" class="form-control" id="DoctorNewCommidityIndication" name="DoctorNewCommidityIndication" placeholder="موارد مصرف">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="DoctorNewCommidityUnIndication">موارد منع مصرف:</label>
+                    <div class="col-sm-10">
+                        <input required type="text" class="form-control" id="DoctorNewCommidityUnIndication" name="DoctorNewCommidityUnIndication" placeholder="موارد منع مصرف">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="SellToAnother">فروش به غير:</label>
+                    <div class="col-sm-10">
+                        <input type="radio" name="SellToAnother" id="SellToAnother" value="">بله
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="SendToAdvertising">تبليغات سايت:</label>
+                    <div class="col-sm-10">
+                        <input type="radio" name="SendToAdvertising" id="SendToAdvertising" value="">بله
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="HowToUse">طريقه مصرف:</label>
+                    <div class="col-sm-10">
+                        <input required type="text" class="form-control" id="HowToUse" name="HowToUse" placeholder="طريقه مصرف">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-info col-sm-4" onclick="NewCommidity()">ثبت دارو</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="Main2" id="Menu2">
+            <div class="panel-body" style="width:100%;">
+                <form class="form-horizontal">
+                    <input type="hidden" class="form-control" id="DoctorComInfoID" name="DoctorComInfoID" value="0">
+                    <input type="hidden" class="form-control" id="DoctorNewCommidityID" name="DoctorNewCommidityID" value="@Session["DoctorNewCommidityID"].ToString()">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="DoctorComInfoName">نام کالا</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" id="DoctorComInfoName" name="DoctorComInfoName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="DoctorComInfoSize">مقدار</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" id="DoctorComInfoSize" name="DoctorComInfoSize">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" onclick="AddRow()" id="btnaddrow" class="btn btn-info btn-sm-3">
+                            <span class="glyphicon glyphicon-plus"></span> اضافه کردن
+                        </button>
+                    </div>
+                </form>
+            </div>
+            @*/*//////////////////================//////////////////*/*@
+            <div class="panel-footer" style="width:100%;background-color:white;">
+                <table class="table table-striped">
+                    <tbody id="TBodyNewCom"></tbody>
+                </table>
+                @*<button type="button" onclick="SaveDB()" id="BtnSave" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-ok-circle"></span> ذخيره</button>*@
+                <a href="../Account/Index"><button type="button" onclick="SaveDB()" id="BtnSave" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-ok-circle"></span> ذخيره</button></a>
+            </div>
+        </div>
+    </div>
+</div>

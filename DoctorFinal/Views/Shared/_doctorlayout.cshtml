@@ -1,0 +1,110 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Index.css" rel="stylesheet" />
+    <link href="~/Content/IndexLog.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.rtl.min.css" rel="stylesheet" />
+    <link href="~/Content/persianDatepicker-default.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/js/persianDatepicker.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/IndexLog.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @if (IsSectionDefined("ViewScript"))
+    {
+        @RenderSection("ViewScript");
+    }
+    <script>
+        $(Load);
+        function Load()
+        {
+            var iddoc = document.getElementById("DocID").innerHTML;
+        }
+        $(document).ready(function () {
+            $("#LeftDivMenuID1").click(function () {
+                $("#LeftDivSubMenu1").fadeToggle("slow");
+            });
+            $("#LeftDivMenuID2").click(function () {
+                $("#LeftDivSubMenu2").fadeToggle("slow");
+            });
+            $("#LeftDivMenuID4").click(function () {
+                $("#LeftDivSubMenu4").fadeToggle("slow");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="TopDivDoc">
+                <ul class="TopUL">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="dropdown" style="float:right">
+                            <a class="dropdown-toggle" data-toggle="dropdown" id="doid">
+                                کاربر:@User.Identity.Name
+                                <span class="glyphicon glyphicon-user"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right" style="background-color:black;">
+                                <li><a href="~/Account/LogOut" style="color:white"><span class="glyphicon glyphicon-log-out"></span> خروج</a></li>
+                                <li><a href="../Doctor/Edit/@Session["DoctorID"].ToString()" style="color:white"><span class="glyphicon glyphicon-pencil"></span> ویرایش اطلاعات</a></li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        @*/////////////////////////////////////////////////*@
+        <div class="row">
+            <div class="col-sm-10" style="height:800px;font-family:'B Yekan';text-align:center;margin-top:150px;padding-left:1px;padding-right:1px;">
+                @RenderBody()
+            </div>
+            <div class="col-sm-2" style="padding-left:0px;">
+                <div class="Left">
+                    <ul class="MenuLeft">
+                        <li>
+                            <a id="LeftDivMenuID1">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span>بیماران</span>
+                            </a>
+                            <ul class="SubMenuLeft" id="LeftDivSubMenu1">
+                                <li><a href="../Customer/Index/@Session["DoctorID"].ToString()">ثبت بیمار</a></li>
+                                <li><a href="../Customer/List/@Session["DoctorID"].ToString()">لیست بیماران</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../DoctorNewCommidity/Index/@Session["DoctorID"].ToString()">
+                                <i class="glyphicon glyphicon-leaf"></i>
+                                <span>ثبت دارو جدید</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="LeftDivMenuID2">
+                                <i class="glyphicon glyphicon-gift"></i>
+                                <span>درآمد</span>
+                            </a>
+                            <ul class="SubMenuLeft" id="LeftDivSubMenu2">
+                                <li><a href="../InCome/Index/@Session["DoctorID"].ToString()">میزان فروش</a></li>
+                            </ul>
+                        </li>
+                        @*<li><a>fdsfds</a></li>*@
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @*/////////////////////////////////////////////////*@
+        <div class="row">
+
+        </div>
+    </div>
+</body>
+</html>

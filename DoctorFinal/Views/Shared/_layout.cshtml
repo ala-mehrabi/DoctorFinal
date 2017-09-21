@@ -1,0 +1,97 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Index.css" rel="stylesheet" />
+    <link href="~/Content/IndexLog.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.rtl.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="js/IndexLog.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @if (IsSectionDefined("ViewScript"))
+    {
+        @RenderSection("ViewScript");
+    }
+    <script>
+
+
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container" style="width:100%">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon icon-bar"></span>
+                            <span class="icon icon-bar"></span>
+                            <span class="icon icon-bar"></span>
+                        </button>
+                        <a href="" class="navbar-brand smoothScroll" style="color:black">سامانه پزشکان</a>
+                    </div>
+                    <div id="mainav" class="collapse navbar-collapse" style="width:100%">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="../Home/Home" class="smoothScroll">صفحه اصلی</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle smoothScroll" data-toggle="dropdown">
+                                    دکترها
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="taCss smoothScroll" href="">ثبت مشتری</a></li>
+                                    <li><a class="taCss smoothScroll" href="">لیست مشتریان</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle smoothScroll" data-toggle="dropdown">
+                                    ورود
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="taCss smoothScroll" href="../Account/LogOn">ورود</a></li>
+                                    <li><a class="taCss smoothScroll" href="../Doctor/Register">ثبت نام</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*/////////////////////////////////////////////////*@
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="Right">
+
+                </div>
+            </div>
+            <div class="col-sm-8" style="height:1500px;font-family:'B Yekan';text-align:center;margin-top:150px;">
+                @RenderBody()
+            </div>
+            <div class="col-sm-2">
+                <div id="BodyData" class="LeftDiv">
+
+                </div>
+            </div>
+        </div>
+        @*/////////////////////////////////////////////////*@
+        <div class="row">
+            
+        </div>
+    </div>
+</body>
+</html>
+
+

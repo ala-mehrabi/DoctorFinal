@@ -1,0 +1,418 @@
+﻿@{
+    ViewBag.Title = " پنل مديريت-ليست بيمار ";
+    Layout = "~/Views/Shared/_doctorlayout.cshtml";
+}
+@section ViewScript
+{
+    <script>
+        function Noskhe(pNoskheID, pNoskheCode, pCustomerID, pNoskheDate, pNoskhePrice) {
+            this.NoskheID = pNoskheID;
+            this.NoskheCode = pNoskheCode;
+            this.NoskheDate = pNoskheDate;
+            this.CustomerID = pCustomerID;
+            this.NoskhePrice = pNoskhePrice;
+        }
+        function NoskheCommidity(pNoskheID, pCommidityID, pNumber, pPriceInDay) {
+            this.NoskheID = pNoskheID;
+            this.CommidityID = pCommidityID;
+            this.Number = pNumber;
+            this.PriceInDay = pPriceInDay;
+        }
+        var Noskhe = new Noskhe(-1, -1, -1, -1);
+        var ListCommidity = [];
+        var ListNoskheCommidity = [];
+        var PN = 0;
+        $(Load);
+        function Load() {
+            ShowCommitityType();
+            ShowCustomer();
+            CreateCode();
+            ShowUpload();
+        }
+        function ShowCustomer() {
+            var Customer = JSON.parse('@Html.Raw(ViewBag.Customer)');
+            CustomerID.value = Customer.CustomerID;
+            CustomerFullName.value = Customer.CustomerFullName;
+            NationalCode.value = Customer.NationalCode;
+            CustomerTel.value = Customer.CustomerTel;
+            CustomerMobile.value = Customer.CustomerMobile;
+            CustomerCode.value = Customer.CustomerCode;
+            CustomerAddress.value = Customer.CustomerAddress;
+            DoctorID.value = Customer.DoctorID;
+        }
+        function openTab(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        function CreateCode() {
+            var code = Math.floor(Math.random() * 100000);
+            document.getElementById('NoskheCode').value = code.toString();
+        }
+        function ShowCommitityType() {
+            var _httpreq = new XMLHttpRequest();
+            _httpreq.onreadystatechange = function () {
+                if (_httpreq.readyState == 4 && _httpreq.status == 200) {
+                    var _listData = JSON.parse(_httpreq.responseText);
+                    var str = "";
+                    for (var i in _listData) {
+
+                        str += "<option value=" + _listData[i].CommidityTypeID + ">" + _listData[i].CommidityTypeDescription + "</option>";
+                    }
+                    CommidityType.innerHTML = str;
+                }
+            }
+            _httpreq.open("Post", "GetCommidityType", true);
+            _httpreq.setRequestHeader("Content-Type", "Content-Type: application/x-www-form-urlencoded");
+            _httpreq.send();
+            Selected();
+        }
+        function Selected() {
+            var selectElem = document.getElementById('CommidityType');
+            selectElem.addEventListener('change', function () {
+                var index = selectElem.selectedIndex;
+                ShowCommidity(index);
+            });
+        }
+        function ShowCommidity(index) {
+            var _httpreq = new XMLHttpRequest();
+            _httpreq.onreadystatechange = function () {
+                if (_httpreq.readyState == 4 && _httpreq.status == 200) {
+                    var _listData = JSON.parse(_httpreq.responseText);
+                    var str = "";
+                    for (var i in _listData) {
+                        ListCommidity[i] = _listData[i];
+                        str += "<option value=" + _listData[i].CommidityID + ">" + _listData[i].CommidityName + "</option>";
+                    }
+                    Commidity.innerHTML = str;
+                }
+            }
+            _httpreq.open("Get", "GetCommidity?index=" + index, true);
+            _httpreq.send();
+
+        }
+        function Exit() {
+            RightDivSearch.style.display = "none";
+            RightDivCust.style.display = "block";
+        }
+        function AddRow() {
+            var comid = document.getElementById('Commidity').selectedIndex + 1;
+            var comName = ListCommidity[comid - 1].CommidityName;
+            var comPrice = ListCommidity[comid - 1].CommidityPrice;
+            var str = "<tr data-Comid='" + comid + "' >";
+            str += "<td class='CommidityName'>" + comName + "</td>";
+            str += "<td class='CommidityPrice'>" + comPrice + "</td>";
+            str += "<td class='tdNumber'><input class='Number' type='text'></td>";
+            str += "<td class='TotalPrice'></td>";
+            str += "<td><a class='BtnRemove'><span class='glyphicon glyphicon-remove'></span></a></td>";
+            str += "</tr>";
+
+            $('#BodyDataCom').append(str);
+            AssaignEventToRows();
+        }
+        function AssaignEventToRows() {
+            $('.BtnRemove').click(RemoveRow);
+            $('.Number').keypress(function (e) {
+                if (e.which == 13) {
+                    $(this).removeClass('bg-danger');
+                    var tr = $(this).parent().parent();
+                    var _total = Number(tr.children('.CommidityPrice').html()) * Number($(this).val());
+                    tr.children('.TotalPrice').html(_total);
+
+                    PN += _total;
+
+
+                }
+            });
+        }
+        function RemoveRow() {
+            $(this).parent().parent().remove();
+        }
+        function SaveDB() {
+            Noskhe.CustomerID = document.getElementById('CustomerID').value;
+            Noskhe.NoskheCode = document.getElementById('NoskheCode').value;
+            Noskhe.NoskheDate = document.getElementById('NoskheDate').value;
+            Noskhe.NoskhePrice = document.getElementById("NoskhePrice").value = PN;
+            ListNoskheCommidity = [];
+            $('#BodyDataCom tr').html(function (index, value) {
+                ListNoskheCommidity[index] = new NoskheCommidity(Noskhe.NoskheID, $(this).attr('data-Comid'), Number($(this).children('.tdNumber').first().children('.Number').first().val()), Number($(this).children('.TotalPrice').html()));
+            });
+            var str = JSON.stringify(Noskhe) + ";" + JSON.stringify(ListNoskheCommidity);
+            $.ajax({
+                type: 'Get',
+                url: 'Save?Data=' + str,
+                success: function (Data, Status, jqXHR) {
+                    if (Data.split(';;;')[0] == "ok") {
+                        alert("عمليات با موفقيت انجام شد");
+                        Noskhe.NoskheID = Number(Data.split(';;;')[1]);
+                        form1.reset();
+                    }
+                }
+            , error: function (a, b, c) {
+                alert(a);
+            }
+            });
+        }
+        $(function () {
+            $("#SabegheDateNow").persianDatepicker();
+            $("#SabegheDateAfter").persianDatepicker();
+            $("#NoskheDate").persianDatepicker();
+            $("#CustomerInfoRegDate").persianDatepicker();
+        });
+        function RegisterNobat() {
+            var data = "SabegheID=" + SabegheID.value + "&SabegheDateNow=" + SabegheDateNow.value + "&SabegheDateAfter=" + SabegheDateAfter.value + "&CustomerID=" + CustomerID.value;
+            var _httpreq = new XMLHttpRequest();
+            _httpreq.onreadystatechange = function () {
+                if (_httpreq.responseText == "ok") {
+                    alert("عملیات با موفقیت انجام شد");
+                }
+            }
+            _httpreq.open("Get", "RegisterNobat?" + data, true);
+            _httpreq.send();
+        }
+
+        function ShowUpload()
+        {
+            var _httpreq = new XMLHttpRequest();
+            _httpreq.onreadystatechange = function ()
+            {
+                if (_httpreq.readyState == 4 && _httpreq.status == 200)
+                {
+                    var _listData = JSON.parse(_httpreq.responseText);
+                    var str = "";
+                    for (var i in _listData)
+                    {
+                        str += "<tr data-Com=" + JSON.stringify(_listData[i]) + ">";
+                        str += "<td>" + _listData[i].CustomerInfoPicName + "</td>";
+                        str += "<td>" + _listData[i].CustomerInfoVazn + "</td>";
+                        str += "<td>" + _listData[i].CustomerInfoGhad + "</td>";
+                        str += "<td>" + _listData[i].CustomerInfoRegDate + "</td>";
+                        str += "<td><button type='button' data-toggle='modal' data-target='#myModal' class='btn btn-info' onclick='ShowPicture(" + _listData[i].CustomerInfoID + ")'>مشاهده</button></td>";
+                        str += "</tr>";
+                    }
+                    BodyUploadData.innerHTML = str;
+                }
+            }
+            _httpreq.open("Post", "GetUploadImage", true);
+            _httpreq.setRequestHeader("Content-Type", "Content-Type: application/x-www-form-urlencoded");
+            _httpreq.send();
+        }
+        function ShowPicture(idpic)
+        {
+            var list = document.getElementById("placehere");
+            var elem = document.createElement("img");
+            elem.setAttribute("class", "PicClass");
+            elem.setAttribute("height", "768");
+            elem.setAttribute("width", "1024");
+            var _httpreq = new XMLHttpRequest();
+            _httpreq.onreadystatechange = function ()
+            {
+                if (_httpreq.readyState == 4 && _httpreq.status == 200)
+                {
+                    list.removeChild(list.firstChild);
+                    var ssd = "";
+                    ssd = "" + this.responseText; +"";
+                    elem.setAttribute("src", "" + ssd + "");
+                }
+                list.appendChild(elem);
+            }
+            _httpreq.open("Get", "SelectImage?id=" + idpic, true);
+            _httpreq.send();
+        }
+    </script>
+
+}
+<div class="MainDiv">
+    @*/*/////////////////===========================================================================////////////////////////*/*@
+    <div class="RightDivSearch" id="RightDivSearch">
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'DescriptionTab')">مشخصات</button>
+            <button class="tablinks" id="Sabeghe" onclick="openTab(event, 'BackGroundTab')">سابقه</button>
+            <button class="tablinks" onclick="openTab(event, 'NoskheTab')">نسخه</button>
+            <button class="tablinks" id="Nobat" onclick="openTab(event, 'NobatDahi')">نوبت دهي</button>
+            <a href="../Account/Index" class="tablinks"><button type="button" class="tablinks" onclick="Exit()">بازگشت</button></a>
+        </div>
+        @*/*////////////////////////DescriptionTab//////////////////////////////*/*@
+
+        <div id="DescriptionTab" class="tabcontent">
+            <form class="form-horizontal" id="form1">
+                <input type="hidden" class="form-control" id="DoctorID" name="DoctorID">
+                <input type="hidden" class="form-control" id="CustomerID" name="CustomerID">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="CustomerFullName">نام:</label>
+                    <div class="col-xs-3">
+                        <input readonly type="text" class="form-control" id="CustomerFullName" name="CustomerFullName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="CustomerTel">تلفن:</label>
+                    <div class="col-xs-3">
+                        <input readonly type="text" class="form-control" id="CustomerTel" name="CustomerTel">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="CustomerMobile">موبايل:</label>
+                    <div class="col-xs-3">
+                        <input readonly type="text" class="form-control" id="CustomerMobile" name="CustomerMobile">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="CustomerAddress">ادرس:</label>
+                    <div class="col-xs-10">
+                        <input readonly type="text" class="form-control" id="CustomerAddress" name="CustomerAddress">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="CustomerCode">کد بيمار:</label>
+                    <div class="col-xs-3">
+                        <input style="color:black;" readonly type="text" class="form-control" id="CustomerCode" name="CustomerCode">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="NationalCode">کدملي:</label>
+                    <div class="col-xs-3">
+                        <input readonly type="text" class="form-control" id="NationalCode" name="NationalCode">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        @*/*////////////////////////BackGroundTab//////////////////////////////*/*@
+
+        <div id="BackGroundTab" class="tabcontent">           
+            <div class="BackGrounDiv">
+                <div class="HeaderUpload">
+                    <a class="btn btn-info btn-lg" href="../Customer/UpLoad/@Session["CustomerID"]">ذخیره</a>
+                </div>
+                <div class="BodyUpload">
+                    <table class="table table-hover table-striped">
+                        <thead class="TblHead">
+                            <tr>
+                                <td>عنوان عکس</td>
+                                <td>وزن</td>
+                                <td>قد</td>
+                                <td>تاریخ</td>
+                                <td>مشاهده عکس</td>
+                            </tr>
+                        </thead>
+                        <tbody id="BodyUploadData"></tbody>
+                    </table>
+                </div>
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <form role="dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body" id="placehere">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*/*////////////////////////NoskheTab//////////////////////////////*/*@
+
+        <div id="NoskheTab" class="tabcontent">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <form class="form-horizontal">
+                        <input type="hidden" class="form-control" id="CustomerID" name="CustomerID">
+                        <input type="hidden" class="form-control" id="NoskheID" name="NoskheID" value="0">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="NoskheCode">کد نسخه</label>
+                            <div class="col-xs-4">
+                                <input type="text" readonly class="form-control" id="NoskheCode" name="NoskheCode">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="NoskheDate">تاريخ نسخه</label>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" id="NoskheDate" name="NoskheDate">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                @*/*//////////////////================//////////////////*/*@
+
+                <div class="panel-body">
+                    <form class="form-horizontal" id="form1">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="CommidityType">گروه کالا:</label>
+                            <div class="col-xs-4">
+                                <select style="height:35px" class="form-control" id="CommidityType" name="CommidityType" required></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="Commidity"> کالا:</label>
+                            <div class="col-xs-4">
+                                <select style="height:35px" class="form-control" id="Commidity" name="Commidity" required></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" onclick="AddRow()" id="btnaddrow" class="btn btn-info btn-lg">
+                                <span class="glyphicon glyphicon-plus"></span> اضافه کردن
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                @*/*//////////////////================//////////////////*/*@
+
+                <div class="panel-footer">
+                    <table class="table table-hover table-striped">
+                        <thead class="TblHead">
+                            <tr>
+                                <td>نام کالا</td>
+                                <td>قيمت کالا</td>
+                                <td>تعداد</td>
+                                <td>قيمت کل</td>
+                                <td>حذف</td>
+                            </tr>
+                        </thead>
+                        <tbody id="BodyDataCom"></tbody>
+                    </table>
+                    <button type="button" onclick="SaveDB()" id="BtnSave" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-ok-circle"></span> ذخيره</button>                   
+                </div>
+            </div>
+        </div>
+
+        @*/*////////////////////////NobatDahi//////////////////////////////*/*@
+
+        <div id="NobatDahi" class="tabcontent" style="height:500px;">
+            <div class="form-inline" style="margin:50px auto;width:100%;height:500px;">
+                <input type="hidden" class="form-control" id="CustomerID" name="CustomerID">
+                <input type="hidden" class="form-control" id="SabegheID" name="SabegheID" value="0">
+                <div class="form-group">
+                    <label for="SabegheDateNow">مراجعه امروز:</label>
+                    <input type="text" class="form-control" id="SabegheDateNow" name="SabegheDateNow" placeholder="تاریخ امروز">
+                </div>
+                <div class="form-group">
+                    <label for="SabegheDateAfter">مراجعه بعدی:</label>
+                    <input type="text" class="form-control" id="SabegheDateAfter" name="SabegheDateAfter" placeholder="تاریخ بعدی">
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" onclick="RegisterNobat()" class="btn btn-info">ثبت نوبت</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    @*/*/////////////////===========================================================================////////////////////////*/*@
+</div>
